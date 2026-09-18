@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A live weather and news dashboard powered by public APIs." />
+  <title>Field Notes | Weather & News</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-left"></div>
+  <div class="ambient ambient-right"></div>
+
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Field Notes home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>FIELD NOTES</span>
+      </a>
+      <div class="live-indicator"><span></span> Live briefing</div>
+      <div class="date-stamp" id="currentDate">Thursday, September 10, 2026</div>
+    </header>
+
+    <section class="intro-block">
+      <p class="eyebrow">Your daily signal</p>
+      <h1>Look outside.<br /><em>Know more.</em></h1>
+      <p class="intro-copy">A clear view of the sky above you and the stories moving the world forward.</p>
+    </section>
+
+    <section class="control-strip" aria-label="Dashboard controls">
+      <form class="location-form" id="locationForm">
+        <label for="locationInput">Check another place</label>
+        <div class="search-field">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+          <input id="locationInput" name="location" placeholder="Search a city..." autocomplete="off" />
+          <button type="submit" aria-label="Search location">Go</button>
+        </div>
+      </form>
+      <button class="refresh-button" id="refreshButton" type="button" title="Refresh live data">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 11a8.1 8.1 0 0 0-14.8-3L3 11"></path><path d="M3 5v6h6"></path><path d="M4 13a8.1 8.1 0 0 0 14.8 3L21 13"></path><path d="M21 19v-6h-6"></path></svg>
+        Refresh
+      </button>
+    </section>
+
+    <div class="status-message" id="statusMessage" role="status" aria-live="polite"></div>
+
+    <section class="dashboard-grid">
+      <article class="weather-card panel" aria-labelledby="weatherHeading">
+        <div class="panel-heading">
+          <div>
+            <p class="section-label">Atmosphere</p>
+            <h2 id="weatherHeading">Weather now</h2>
+          </div>
+          <span class="api-tag">OPEN-METEO</span>
+        </div>
+        <div class="weather-main" id="weatherContent">
+          <div class="weather-summary">
+            <div class="weather-icon" id="weatherIcon" aria-hidden="true">☀︎</div>
+            <div>
+              <p class="location-name" id="locationName">Loading...</p>
+              <p class="weather-description" id="weatherDescription">Getting the latest conditions</p>
+            </div>
+          </div>
+          <div class="temperature-row">
+            <span class="temperature" id="temperature">--</span><span class="degree">°</span>
+            <span class="feels-like">Feels like <strong id="feelsLike">--°</strong></span>
+          </div>
+          <div class="weather-details">
+            <div><span>Wind</span><strong id="windSpeed">-- km/h</strong></div>
+            <div><span>Humidity</span><strong id="humidity">--%</strong></div>
+            <div><span>High / low</span><strong><span id="highTemp">--°</span> / <span id="lowTemp">--°</span></strong></div>
+          </div>
+        </div>
+        <div class="sunline"><span>Sunrise <strong id="sunrise">--:--</strong></span><span class="sun-track"><i></i></span><span>Sunset <strong id="sunset">--:--</strong></span></div>
+      </article>
+
+      <article class="news-card panel" aria-labelledby="newsHeading">
+        <div class="panel-heading">
+          <div>
+            <p class="section-label">The wider world</p>
+            <h2 id="newsHeading">Top stories</h2>
+          </div>
+          <span class="api-tag">HN ALGOLIA</span>
+        </div>
+        <div class="news-list" id="newsList">
+          <div class="skeleton skeleton-story"></div><div class="skeleton skeleton-story"></div><div class="skeleton skeleton-story"></div>
+        </div>
+        <div class="news-footer"><span>Curated from Hacker News</span><a href="https://news.ycombinator.com/" target="_blank" rel="noreferrer">Open source ↗</a></div>
+      </article>
+    </section>
+
+    <footer class="page-footer"><span>FIELD NOTES / EDITION 01</span><span>Data updates on demand</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

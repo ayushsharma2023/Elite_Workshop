@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Signal Chat, a real-time room-based chat application." />
+  <title>Signal Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark"><i></i><i></i><i></i></span><span>SIGNAL</span></div>
+      <div class="workspace-label">Workspace <span>⌄</span></div>
+      <nav class="room-list" aria-label="Chat rooms">
+        <p class="nav-label">Channels</p>
+        <button class="room-button active" data-room="general"><span>#</span> general</button>
+        <button class="room-button" data-room="random"><span>#</span> random</button>
+        <button class="room-button" data-room="design"><span>#</span> design</button>
+        <button class="room-button" data-room="music"><span>#</span> music</button>
+        <p class="nav-label single-room-label">Single chat room</p>
+        <button class="room-button single-room-button" data-room="single"><span>●</span> one-to-one</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="connection-status"><span id="connectionDot"></span><span id="connectionText">Connecting...</span></div><span class="version">v1.0.0</span></div>
+    </aside>
+
+    <main class="chat-layout">
+      <header class="chat-header">
+        <div><div class="room-title"><span>#</span><h1 id="roomTitle">general</h1></div><p id="roomDescription">The main room for the whole team.</p></div>
+        <div class="header-actions"><span class="secure-badge">● End-to-end feel</span><button class="icon-button" id="clearNameButton" title="Change display name" aria-label="Change display name">✎</button></div>
+      </header>
+
+      <section class="messages" id="messages" aria-live="polite" aria-label="Messages"></section>
+      <div class="typing-line" id="typingLine" aria-live="polite"></div>
+
+      <form class="composer" id="messageForm">
+        <button class="attach-button" type="button" title="Attachments are coming soon" aria-label="Attachments">+</button>
+        <input id="messageInput" type="text" maxlength="500" autocomplete="off" placeholder="Message #general" aria-label="Write a message" />
+        <span class="char-count" id="charCount">0/500</span>
+        <button class="send-button" type="submit" aria-label="Send message">↗</button>
+      </form>
+      <p class="composer-hint">Press Enter to send <span>•</span> Messages are visible to everyone in this room</p>
+    </main>
+
+    <aside class="members-panel">
+      <div class="members-heading"><h2>In this room</h2><span id="memberCount">0</span></div>
+      <div class="member-list" id="memberList"></div>
+      <div class="room-note"><span>✦</span><div><strong>Keep it human</strong><p>Say something worth replying to.</p></div></div>
+    </aside>
+  </div>
+
+  <div class="name-modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-card"><div class="modal-kicker">Welcome to Signal</div><h2 id="authTitle">Sign in to chat</h2><p id="authSubtitle">Use your account to join the conversation.</p><form id="authForm"><input id="authUsername" class="register-field" maxlength="24" placeholder="Username" autocomplete="username" /><input id="authEmail" type="email" maxlength="120" placeholder="Email address" autocomplete="email" required /><input id="authPassword" type="password" minlength="8" placeholder="Password" autocomplete="current-password" required /><div class="auth-error" id="authError" role="alert"></div><button type="submit" id="authSubmit">Sign in <span>↗</span></button></form><button class="auth-toggle" id="authToggle" type="button">Need an account? Create one</button></div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
