@@ -1,0 +1,23 @@
+{
+  "name": "signal-editor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Real-time collaborative document editor with React, Node.js, Socket.IO, and PostgreSQL.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "client:dev": "vite --config client/vite.config.js",
+    "client:build": "vite build --config client/vite.config.js"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.2",
+    "express": "^4.21.2",
+    "pg": "^8.13.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "vite": "^7.1.5"
+  }
+}

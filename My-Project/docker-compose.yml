@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: signal-editor-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: signal_editor
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - signal_editor_data:/var/lib/postgresql/data
+
+volumes:
+  signal_editor_data:
